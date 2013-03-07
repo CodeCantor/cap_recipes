@@ -10,7 +10,7 @@ Capistrano::Configuration.instance(:must_exist).load do
     end
     after "deploy:setup", "monit:setup"
 
-    task(:unicorn, roles: :app) { monit_config "unicorn" }
+    task(:unicorn, roles: :app) { monit_config "unicorn", "#{application}_unicorn" }
 
     %w[start stop restart syntax reload].each do |command|
       desc "Run Monit #{command} script"
@@ -22,11 +22,12 @@ Capistrano::Configuration.instance(:must_exist).load do
     end
   end
 
-  def monit_config(name, destination = nil)
-    destination ||= "/etc/monit/conf.d/#{name}.conf"
-    template "monit/#{name}.erb", "/tmp/monit_#{name}"
+  def monit_config(name, d_name=nil, destination = nil)
+    d_name ||= name
+    destination ||= "/etc/monit/conf.d/#{d_name}.conf"
+    template "monit/#{name}.erb", "/tmp/monit_#{d_name}"
     with_sudo_user do
-      sudo "mv /tmp/monit_#{name} #{destination}"
+      sudo "mv /tmp/monit_#{d_name} #{destination}"
       sudo "chown root #{destination}"
       sudo "chmod 600 #{destination}"
     end
