@@ -3,7 +3,7 @@ Capistrano::Configuration.instance(:must_exist).load do
     desc "Compress assets in a local file"
     task :compress_assets do
       run_locally("rm -rf public/assets/*")
-      run_locally("bundle exec rake assets:precompile")
+      run_locally("bundle exec rake RAILS_ENV=production assets:precompile")
       run_locally("touch assets.tgz && rm assets.tgz")
       run_locally("tar zcvf assets.tgz public/assets/")
       run_locally("mv assets.tgz public/assets/")
