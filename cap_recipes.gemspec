@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "cap_recipes"
-  s.version     = "0.0.1"
+  s.version     = "0.0.2"
   s.author      = "Enrique Alvarez"
   s.email       = "enrique@codecantor.com"
   s.homepage    = "http://github.com/codecantor/cap_recipes"
