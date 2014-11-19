@@ -12,9 +12,9 @@ set -e
 # Feel free to change any of the following variables for your app:
 TIMEOUT=${TIMEOUT-60}
 APP_ROOT=<%= current_path %>
-PID=<%= unicorn_pid %>
-CMD="cd <%= current_path %>; rvm use <%= rvm_ruby_string %>; bundle exec unicorn -D -c <%= unicorn_config %> -E <%= rails_env %>"
-AS_USER=<%= unicorn_user %>
+PID=<%= fetch(:unicorn_pid) %>
+CMD="cd <%= current_path %>; rvm use <%= fetch(:rvm_ruby_version) %>; bundle exec unicorn -D -c <%= fetch(:unicorn_config) %> -E <%= fetch(:stage) %>"
+AS_USER=<%= fetch(:unicorn_user) %>
 set -u
 
 OLD_PIN="$PID.oldbin"

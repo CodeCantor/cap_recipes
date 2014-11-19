@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "cap_recipes"
-  s.version     = "0.0.2"
+  s.version     = "0.0.3"
   s.author      = "Enrique Alvarez"
   s.email       = "enrique@codecantor.com"
   s.homepage    = "http://github.com/codecantor/cap_recipes"
@@ -10,8 +10,5 @@ Gem::Specification.new do |s|
   s.files        = Dir["{lib,tasks}/**/*", "[A-Z]*"]
   s.require_path = "lib"
 
-  s.add_development_dependency 'capistrano', '~> 2.14.2'
-  s.add_development_dependency 'capistrano-ext', '~> 1.2.1'
-  s.add_development_dependency 'capistrano-chef', '~> 0.0.6'
-  s.add_development_dependency 'rvm-capistrano', '~> 1.2.7'
+  s.add_dependency 'capistrano', '~> 3.2.1'
 end

@@ -1,10 +1,10 @@
-upstream <%= application %>_unicorn {
-  server unix:/tmp/unicorn.<%= application %>.sock fail_timeout=0;
+upstream <%= fetch(:application) %>_unicorn {
+  server unix:/tmp/unicorn.<%= fetch(:application) %>.sock fail_timeout=0;
 }
 
 server {
   listen 80;
-  server_name <%= server_name %>;
+  server_name <%= fetch(:server_name) %>;
   root <%= current_path %>/public;
 
   if (-f $document_root/system/maintenance.html) {
@@ -28,7 +28,7 @@ server {
     proxy_set_header Host $http_host;
     proxy_redirect off;
     include proxy_params;
-    proxy_pass http://<%= application %>_unicorn;
+    proxy_pass http://<%= fetch(:application) %>_unicorn;
   }
 
   error_page 500 502 503 /500.html;
